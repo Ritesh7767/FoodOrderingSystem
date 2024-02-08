@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering system</title>
+    <style>
+        div{
+            border: 2px solid black;
+            width: 60%;
+            height: 300px;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+        }
+        #orderId{
+            border: 2px solid black;
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form>
+        <input type="checkbox" name="Foods" id="Breakfast" value="Breakfast">
+        <label for="">Breakfast</label><br>
+        <input type="checkbox" name="Foods" id="Burgers" value="Burgers">
+        <label for="Burgers">Burgers</label><br>
+        <input type="checkbox" name="Foods" id="ChickenFish" value="Chicken and Fish Sandwiches">
+        <label for="ChickenFish">Chicken and Fish Sandwiches</label><br>
+        <input type="checkbox" name="Foods" id="MCnuggets" value="McNuggets and Meals">
+        <label for="MCnuggets">McNuggets and Meals</label><br>
+        <input type="checkbox"name="Foods"  id="friesSides" value="friesSides">
+        <label for="friesSides">friesSides</label><br>
+        <input type="checkbox" name="Foods" id="HappyMeal" value="HappyMeal">
+        <label for="HappyMeal">HappyMeal</label><br>
+        <input type="checkbox" name="Foods" id="Coffee" value="McCafe Coffees">
+        <label for="Coffee">McCafe Coffees</label><br>
+        <input type="checkbox" name="Foods" id="sweets" value="Sweets and Treats">
+        <label for="sweets">Sweets & Treats</label><br>
+        <input type="checkbox" name="Foods" id="beverages" value="Beverages">
+        <label for="beverages">Beverages</label><br>
+        <input type="button" value="Submit" id="submit">
+    </form>
+
+        <div></div>
+
+        <div id="orderId"></div>
+</body>
+</html>
+
+<script>
+
+    let Images = {
+
+        "Breakfast" : "https://s7d1.scene7.com/is/image/mcdonalds/breakfast_300x300:category-panel-left-desktop",
+        "Burgers" : "https://s7d1.scene7.com/is/image/mcdonalds/burgers_300x300:category-panel-left-desktop",
+        "Chicken and Fish Sandwiches" : "https://s7d1.scene7.com/is/image/mcdonalds/nav_chickenfishsandwiches_160x160:category-panel-left-desktop",
+        "McNuggets and Meals" : "https://s7d1.scene7.com/is/image/mcdonalds/nav_mcnuggetscombo_160x160:category-panel-left-desktop",
+        "friesSides" : "https://s7d1.scene7.com/is/image/mcdonalds/snacks_sides_300x300:category-panel-left-desktop",
+        "HappyMeal" : "https://s7d1.scene7.com/is/image/mcdonalds/nav_happy_meal_160x160:category-panel-left-desktop",
+        "McCafe Coffees" : "https://s7d1.scene7.com/is/image/mcdonalds/mccafe_300x300:category-panel-left-desktop",
+        "Sweets and Treats" : "https://s7d1.scene7.com/is/image/mcdonalds/desserts_shakes_300x300:category-panel-left-desktop",
+        "Beverages" : "https://s7d1.scene7.com/is/image/mcdonalds/drinks_300x300:category-panel-left-desktop",
+    }
+
+    document.querySelector("#submit").addEventListener("click", function(){
+        event.preventDefault()
+        let checkbox = document.getElementsByName("Foods")
+        let checkBoxChecked = []
+
+        console.log(checkbox)
+
+        for(let i of checkbox){
+            if(i.checked){
+                checkBoxChecked.push(i.value)
+            }
+        }
+
+        handleImages(checkBoxChecked)
+    })
+
+    function handleImages(arr){
+        
+        let container = document.querySelector("div")
+        let orderContainer = document.querySelector("#orderId")
+        container.innerHTML = ""
+        orderContainer.innerHTML = ""
+        setTimeout(function(){
+                for(let ele in Images){
+                    for(let food of arr){
+                        if(ele == food){
+                        let image = document.createElement("img")
+                        let orderStatus = document.createElement("p")
+                        image.src = Images[ele]
+                        container.append(image)
+
+                        orderStatus.innerText = `${ele} delivered`
+                        orderContainer.append(orderStatus)
+
+            }
+          }
+        }
+        }, 3000)
+    }
+</script>
